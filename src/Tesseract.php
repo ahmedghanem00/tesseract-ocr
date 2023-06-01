@@ -212,15 +212,7 @@ class Tesseract
         ConfigBag $config = null
     ): string
     {
-        if (extension_loaded("imagick")) {
-            if ($imageSource instanceof Image && $imageSource->getCore() instanceof \Imagick) {
-                $imageSource = $imageSource->getCore()->getImageBlob();
-            } else if ($imageSource instanceof \Imagick) {
-                $imageSource = $imageSource->getImageBlob();
-            }
-        }
-
-        $image = ImageManagerStatic::make($imageSource);
+        $image = ImageManagerStatic::make($this->transformImageSourceIfNecessary($imageSource));
 
         if (is_string($imageSource) && file_exists($imageSource)) {
             $imagePath = $imageSource;
@@ -241,6 +233,24 @@ class Tesseract
     }
 
     /**
+     * @param mixed $imageSource
+     * @return mixed
+     * @throws Exception
+     */
+    private function transformImageSourceIfNecessary(mixed $imageSource): mixed
+    {
+        if (extension_loaded("imagick")) {
+            if ($imageSource instanceof Image && $imageSource->getCore() instanceof \Imagick) {
+                $imageSource = $imageSource->getCore()->getImageBlob();
+            } else if ($imageSource instanceof \Imagick) {
+                $imageSource = $imageSource->getImageBlob();
+            }
+        }
+
+        return $imageSource;
+    }
+
+    /**
      * @param string $imagePath
      * @param array $langs
      * @param PSM|int|null $psm Page segmentation mode
@@ -252,7 +262,7 @@ class Tesseract
      * @param ConfigBag|null $config
      * @return string
      */
-    public function doRecognize(
+    private function doRecognize(
         string       $imagePath,
         array        $langs,
         PSM|int|null $psm,

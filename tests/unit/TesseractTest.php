@@ -88,6 +88,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognize(): void
     {
@@ -102,6 +103,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithWrongTessDataPath(): void
     {
@@ -116,6 +118,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithMisConfiguredDPI(): void
     {
@@ -131,6 +134,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithInvalidConfig(): void
     {
@@ -145,6 +149,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithTimeout(): void
     {
@@ -159,6 +164,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithOnlineImage(): void
     {
@@ -187,6 +193,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithEmptyGDImage(): void
     {
@@ -203,6 +210,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithEmptyImagickImage(): void
     {
@@ -219,6 +227,7 @@ class TesseractTest extends TestCase
     /**
      * @covers Tesseract::recognize
      * @return void
+     * @throws Exception
      */
     public function testRecognizeWithInvalidImageSource(): void
     {
