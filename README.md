@@ -2,6 +2,12 @@
 
 A PHP wrapper for Tesseract-OCR binary
 
-# Installation
+## Installation
+
+````
+$ composer require ahmedghanem00/tesseract-ocr
+````
 
 # Usage
+
+##
