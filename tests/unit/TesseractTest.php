@@ -18,8 +18,8 @@ use ahmedghanem00\TesseractOCR\Exception\Execution\UnsupportedLanguageException;
 use ahmedghanem00\TesseractOCR\Exception\Execution\WrongDPIException;
 use ahmedghanem00\TesseractOCR\Tesseract;
 use Exception;
-use GdImage;
 use Intervention\Image\Exception\NotReadableException;
+use Intervention\Image\ImageManager;
 use PHPUnit\Framework\TestCase;
 use Smalot\PdfParser\Parser;
 use stdClass;
@@ -77,7 +77,12 @@ class TesseractTest extends TestCase
 
         $tesseract->setTessDataDirPath(__DIR__);
 
-        $this->assertEmpty($tesseract->getSupportedLanguages());
+        if (PHP_OS === 'Linux') {
+            $this->expectException(UnsupportedLanguageException::class);
+            $tesseract->getSupportedLanguages();
+        } else {
+            $this->assertEmpty($tesseract->getSupportedLanguages());
+        }
     }
 
     /**
@@ -183,26 +188,32 @@ class TesseractTest extends TestCase
      * @covers Tesseract::recognize
      * @return void
      */
-    public function testRecognizeWithEmptyImage(): void
+    public function testRecognizeWithEmptyGDImage(): void
     {
         $tesseract = new Tesseract();
 
         $this->expectException(EmptyResultException::class);
+        $emptyImage = (new ImageManager(['driver' => 'gd']))->canvas(400, 400);
 
-        $tesseract->recognize($this->createEmptyImage());
+        $tesseract->recognize($emptyImage);
+        $tesseract->recognize($emptyImage->getCore());
+        $tesseract->recognize($emptyImage->getEncoded());
     }
 
     /**
-     * @return GdImage
+     * @covers Tesseract::recognize
+     * @return void
      */
-    private function createEmptyImage(): GdImage
+    public function testRecognizeWithEmptyImagickImage(): void
     {
-        $img = imagecreatetruecolor(400, 400);
+        $tesseract = new Tesseract();
 
-        $bg = imagecolorallocate($img, 255, 255, 255);
-        imagefilledrectangle($img, 0, 0, 120, 20, $bg);
+        $this->expectException(EmptyResultException::class);
+        $emptyImage = (new ImageManager(['driver' => 'imagick']))->canvas(400, 400);
 
-        return $img;
+        $tesseract->recognize($emptyImage);
+        $tesseract->recognize($emptyImage->getCore());
+        $tesseract->recognize($emptyImage->getEncoded());
     }
 
     /**
