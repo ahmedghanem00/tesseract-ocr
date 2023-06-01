@@ -146,4 +146,4 @@ You can also run `tesseract --print-parameters` to see the list of available con
 
 # Licence
 
-tesseract-ocr is released under the [License][].
+tesseract-ocr is licensed under the [MIT License](http://opensource.org/licenses/MIT).
