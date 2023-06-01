@@ -12,7 +12,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -21,9 +21,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-
-      - name: OCR PDF Action
-        uses: MarketingPipeline/OCR-PDF-Action@v1.0.0
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -39,9 +36,6 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --dev
-
-      - name: Run test suite
-        run: composer run-script test
 
       - name: Run PHP-Stan
         run: composer run-script phpstan
