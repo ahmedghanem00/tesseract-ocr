@@ -15,6 +15,8 @@ use ahmedghanem00\TesseractOCR\Enum\PSM;
 use ahmedghanem00\TesseractOCR\Exception\EmptyResultException;
 use ahmedghanem00\TesseractOCR\Exception\Execution\UnsuccessfulExecutionException;
 use ahmedghanem00\TesseractOCR\Exception\ParseException;
+use Exception;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManagerStatic;
 use InvalidArgumentException;
 use Symfony\Component\Process\Process;
@@ -196,6 +198,7 @@ class Tesseract
      * @param bool $outputAsPDF
      * @param ConfigBag|null $config
      * @return string
+     * @throws Exception
      */
     public function recognize(
         mixed     $imageSource,
@@ -209,6 +212,14 @@ class Tesseract
         ConfigBag $config = null
     ): string
     {
+        if (extension_loaded("imagick")) {
+            if ($imageSource instanceof Image && $imageSource->getCore() instanceof \Imagick) {
+                $imageSource = $imageSource->getCore()->getImageBlob();
+            } else if ($imageSource instanceof \Imagick) {
+                $imageSource = $imageSource->getImageBlob();
+            }
+        }
+
         $image = ImageManagerStatic::make($imageSource);
 
         if (is_string($imageSource) && file_exists($imageSource)) {

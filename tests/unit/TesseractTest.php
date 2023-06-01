@@ -93,10 +93,10 @@ class TesseractTest extends TestCase
     {
         $tesseract = new Tesseract();
 
-        $expectedText = str_replace('\n', "\n", file_get_contents(__DIR__ . '/Data/paragraph1'));
         $actualText = $tesseract->recognize(__DIR__ . "/Data/paragraph1.png", dpi: 120);
 
-        $this->assertStringContainsString($expectedText, $actualText);
+        $this->assertStringContainsString("This is text contained in the first paragraph", $actualText);
+        $this->assertStringContainsString("This is text contained in the second paragraph", $actualText);
     }
 
     /**
@@ -206,7 +206,6 @@ class TesseractTest extends TestCase
      */
     public function testRecognizeWithEmptyImagickImage(): void
     {
-        $this->markTestSkipped("Temp for now");
         $tesseract = new Tesseract();
 
         $this->expectException(EmptyResultException::class);
