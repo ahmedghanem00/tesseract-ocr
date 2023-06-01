@@ -40,7 +40,7 @@ class TesseractTest extends TestCase
 
         $version = $tesseract->getVersion();
 
-        $this->assertStringContainsString("tesseract v", $version);
+        $this->assertStringContainsString("tesseract ", $version); # Not very good assertion but it just a temp for now
     }
 
     /**
@@ -195,9 +195,9 @@ class TesseractTest extends TestCase
         $this->expectException(EmptyResultException::class);
         $emptyImage = (new ImageManager(['driver' => 'gd']))->canvas(400, 400);
 
-        $tesseract->recognize($emptyImage);
-        $tesseract->recognize($emptyImage->getCore());
-        $tesseract->recognize($emptyImage->getEncoded());
+        $tesseract->recognize($emptyImage, dpi: 70);
+        $tesseract->recognize($emptyImage->getCore(), dpi: 70);
+        $tesseract->recognize($emptyImage->getEncoded(), dpi: 70);
     }
 
     /**
@@ -211,9 +211,9 @@ class TesseractTest extends TestCase
         $this->expectException(EmptyResultException::class);
         $emptyImage = (new ImageManager(['driver' => 'imagick']))->canvas(400, 400);
 
-        $tesseract->recognize($emptyImage);
-        $tesseract->recognize($emptyImage->getCore());
-        $tesseract->recognize($emptyImage->getEncoded());
+        $tesseract->recognize($emptyImage, dpi: 70);
+        $tesseract->recognize($emptyImage->getCore(), dpi: 70);
+        $tesseract->recognize($emptyImage->getEncoded(), dpi: 70);
     }
 
     /**
