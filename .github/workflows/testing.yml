@@ -43,3 +43,6 @@ jobs:
 
       - name: Run PHP-Stan
         run: composer run-script phpstan
+
+      - name: Run Tests
+        run: composer run-script test
