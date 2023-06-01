@@ -21,6 +21,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
+          extensions: imagick, gd
+
+      - name: Install Tesseract
+        run: sudo apt install tesseract-ocr
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
