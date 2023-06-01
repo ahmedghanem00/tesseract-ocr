@@ -31,7 +31,7 @@
     "ext-gd": "*",
     "symfony/string": "6.*",
     "symfony/process": "6.*",
-    "intervention/image": "2.7.2"
+    "intervention/image": "2.7.*"
   },
   "require-dev": {
     "phpunit/phpunit": "dev-main",
