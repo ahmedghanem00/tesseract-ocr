@@ -1,0 +1,46 @@
+{
+  "name": "ahmedghanem00/tesseract-ocr",
+  "description": "A PHP wrapper for Tesseract-OCR binary",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "tesseract",
+    "ocr",
+    "text recognition",
+    "ocr recognition",
+    "php-wrapper"
+  ],
+  "authors": [
+    {
+      "name": "Ahmed Ghanem",
+      "email": "ahmedghanem7361@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ahmedghanem00\\TesseractOCR\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ahmedghanem00\\TesseractOCR\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=8.1",
+    "ext-gd": "*",
+    "symfony/string": "6.*",
+    "symfony/process": "6.*",
+    "intervention/image": "2.7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "dev-main",
+    "phpstan/phpstan": "1.10.x-dev",
+    "smalot/pdfparser": "dev-master"
+  },
+  "scripts": {
+    "test": "@php vendor/bin/phpunit",
+    "phpstan": "@php vendor/bin/phpstan analyse src tests"
+  },
+  "minimum-stability": "dev"
+}
