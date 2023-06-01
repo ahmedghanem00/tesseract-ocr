@@ -92,9 +92,9 @@ To specify the Page-Segmentation-Model (PSM):
 use ahmedghanem00\TesseractOCR\Enum\PSM;
 
 # using PSM enum
-$result = $tesseract->recognize("test.png", PSM: PSM::SINGLE_BLOCK);
+$result = $tesseract->recognize("test.png", psm: PSM::SINGLE_BLOCK);
 # OR by using id directly
-$result = $tesseract->recognize("test.png", PSM: 3);
+$result = $tesseract->recognize("test.png", psm: 3);
 ````
 
 To specify the OCR-Engine-Mode (OEM):
@@ -103,9 +103,9 @@ To specify the OCR-Engine-Mode (OEM):
 use ahmedghanem00\TesseractOCR\Enum\OEM;
 
 # using OEM enum
-$result = $tesseract->recognize("test.png", OEM: OEM::LEGACY_WITH_LSTM);
+$result = $tesseract->recognize("test.png", oem: OEM::LEGACY_WITH_LSTM);
 # OR by using id directly
-$result = $tesseract->recognize("test.png", OEM: 3);
+$result = $tesseract->recognize("test.png", oem: 3);
 ````
 
 To specify the DPI of the input image:
