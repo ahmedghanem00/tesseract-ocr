@@ -22,6 +22,9 @@ jobs:
         with:
           php-version: 8.2
 
+      - name: OCR PDF Action
+        uses: MarketingPipeline/OCR-PDF-Action@v1.0.0
+
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
 
