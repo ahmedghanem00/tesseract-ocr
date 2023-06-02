@@ -30,7 +30,7 @@ $tesseract->setBinaryPath("path/to/binary/location");
 To specify the tesseract process timeout:
 
 ````php
-$tesseract = new \ahmedghanem00\TesseractOCR\Tesseract(timeout: 3);
+$tesseract = new \ahmedghanem00\TesseractOCR\Tesseract(processTimeout: 3);
 # OR
 $tesseract->setProcessTimeout(2.5);
 ````
