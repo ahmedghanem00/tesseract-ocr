@@ -151,7 +151,7 @@ class Tesseract
             throw UnsuccessfulExecutionException::newFromProcess($process);
         }
 
-        if (empty(preg_replace("/\s+/", "", $process->getOutput()))) {
+        if ('' === preg_replace("/\s+/", "", $process->getOutput())) {
             throw new EmptyResultException($process);
         }
 
