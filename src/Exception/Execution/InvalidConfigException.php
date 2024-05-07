@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * This file is part of the TesseractOCR package.
  *
@@ -15,5 +17,4 @@ namespace ahmedghanem00\TesseractOCR\Exception\Execution;
  */
 class InvalidConfigException extends UnsuccessfulExecutionException
 {
-
 }

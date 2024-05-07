@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * This file is part of the TesseractOCR package.
  *
@@ -12,6 +14,7 @@ namespace ahmedghanem00\TesseractOCR\Exception\Execution;
 
 use RuntimeException;
 use Symfony\Component\Process\Process;
+
 use function Symfony\Component\String\u;
 
 /**
