@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			# Ignore this error temporary for now
+			message: "#^Method ahmedghanem00\\\\TesseractOCR\\\\Exception\\\\Execution\\\\UnsuccessfulExecutionException\\:\\:newFromProcess\\(\\) should return static\\(ahmedghanem00\\\\TesseractOCR\\\\Exception\\\\Execution\\\\UnsuccessfulExecutionException\\) but returns ahmedghanem00\\\\TesseractOCR\\\\Exception\\\\Execution\\\\UnsuccessfulExecutionException\\.$#"
+			count: 1
+			path: src/Exception/Execution/UnsuccessfulExecutionException.php
