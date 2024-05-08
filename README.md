@@ -1,4 +1,4 @@
-# tesseract-ocr
+# Tesseract-OCR PHP Wrapper
 
 A PHP wrapper for Tesseract-OCR binary.
 
@@ -23,7 +23,7 @@ Otherwise, You can do:
 
 ````php
 $tesseract = new \ahmedghanem00\TesseractOCR\Tesseract("path/to/binary/location");
-# OR
+# OR, If you already have an initiated instance 
 $tesseract->setBinaryPath("path/to/binary/location");
 ````
 
@@ -63,8 +63,9 @@ To OCR an Image:
 
 ````php
 $result = $tesseract->recognize("test.png");
-##
+## OR
 $result = $tesseract->recognize("https://example.com/test.png");
+## etc.
 ````
 
 Thanks to the [Intervention/image](https://github.com/Intervention/image) package. The recognize method can accept
@@ -146,4 +147,4 @@ You can also run `tesseract --print-parameters` to see the list of available con
 
 # Licence
 
-Package is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+Package is licensed under the [MIT License](http://opensource.org/licenses/MIT). For more info, You can take a look at the [License File](LICENSE).
