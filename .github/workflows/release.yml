@@ -26,4 +26,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.RELEASE_TAG }}
-          name: Release v${{ env.RELEASE_TAG }}
+          name: v${{ env.RELEASE_TAG }}
