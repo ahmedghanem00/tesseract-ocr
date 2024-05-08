@@ -107,7 +107,10 @@ class TesseractTest extends TestCase
 
         $tesseract->recognize(__DIR__ . "/Data/paragraph1.png", dpi: 20); # out of range - lower
         $tesseract->recognize(__DIR__ . "/Data/paragraph1.png", dpi: 5000); # out of range - higher
-        $tesseract->recognize(__DIR__ . "/Data/paragraph1.png", dpi: 90); # in range but less than the estimated dpi of the input image
+        $tesseract->recognize(
+            __DIR__ . "/Data/paragraph1.png",
+            dpi: 90
+        ); # in range but less than the estimated dpi of the input image
     }
 
     /**
