@@ -22,20 +22,15 @@ use ahmedghanem00\TesseractOCR\Tesseract;
 use Exception;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManager;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Smalot\PdfParser\Parser;
 use stdClass;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
 
-/**
- *
- */
+#[CoversClass(Tesseract::class)]
 class TesseractTest extends TestCase
 {
-    /**
-     * @covers Tesseract::getVersion
-     * @return void
-     */
     public function testGetVersion(): void
     {
         $tesseract = new Tesseract();
@@ -45,10 +40,6 @@ class TesseractTest extends TestCase
         $this->assertStringContainsString("tesseract ", $version); # Not very good assertion but it just a temp for now
     }
 
-    /**
-     * @covers Tesseract::getVersion
-     * @return void
-     */
     public function testGetVersionWithInvalidBinaryPath(): void
     {
         $tesseract = new Tesseract("/not/exist/path");
@@ -58,10 +49,6 @@ class TesseractTest extends TestCase
         $tesseract->getVersion();
     }
 
-    /**
-     * @covers Tesseract::getSupportedLanguages
-     * @return void
-     */
     public function testGetSupportedLanguages(): void
     {
         $tesseract = new Tesseract();
@@ -69,10 +56,6 @@ class TesseractTest extends TestCase
         $this->assertIsArray($tesseract->getSupportedLanguages());
     }
 
-    /**
-     * @covers Tesseract::getSupportedLanguages
-     * @return void
-     */
     public function testGetSupportedLanguagesWithWrongTessDataPath(): void
     {
         $tesseract = new Tesseract();
@@ -88,8 +71,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognize(): void
@@ -103,8 +84,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithWrongTessDataPath(): void
@@ -118,8 +97,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithMisConfiguredDPI(): void
@@ -134,8 +111,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithInvalidConfig(): void
@@ -149,8 +124,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithTimeout(): void
@@ -164,8 +137,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithOnlineImage(): void
@@ -178,8 +149,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithOutputAsPDF(): void
@@ -193,8 +162,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithEmptyGDImage(): void
@@ -210,8 +177,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithEmptyImagickImage(): void
@@ -227,8 +192,6 @@ class TesseractTest extends TestCase
     }
 
     /**
-     * @covers Tesseract::recognize
-     * @return void
      * @throws Exception
      */
     public function testRecognizeWithInvalidImageSource(): void
