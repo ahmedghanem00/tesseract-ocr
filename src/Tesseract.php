@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /*
  * This file is part of the TesseractOCR package.
  *
@@ -16,6 +18,7 @@ use ahmedghanem00\TesseractOCR\Exception\EmptyResultException;
 use ahmedghanem00\TesseractOCR\Exception\Execution\UnsuccessfulExecutionException;
 use ahmedghanem00\TesseractOCR\Exception\ParseException;
 use Exception;
+use Imagick;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManagerStatic;
 use InvalidArgumentException;
@@ -201,17 +204,16 @@ class Tesseract
      * @throws Exception
      */
     public function recognize(
-        mixed     $imageSource,
-        array     $langs = [],
-        PSM|int   $psm = null,
-        OEM|int   $oem = null,
-        int       $dpi = null,
-        string    $wordsFilePath = null,
-        string    $patternsFilePath = null,
-        bool      $outputAsPDF = false,
+        mixed $imageSource,
+        array $langs = [],
+        PSM|int $psm = null,
+        OEM|int $oem = null,
+        int $dpi = null,
+        string $wordsFilePath = null,
+        string $patternsFilePath = null,
+        bool $outputAsPDF = false,
         ConfigBag $config = null
-    ): string
-    {
+    ): string {
         $image = ImageManagerStatic::make($this->transformImageSourceIfNecessary($imageSource));
 
         if (is_string($imageSource) && file_exists($imageSource)) {
@@ -224,7 +226,17 @@ class Tesseract
         }
 
         try {
-            return $this->doRecognize($imagePath, $langs, $psm, $oem, $dpi, $wordsFilePath, $patternsFilePath, $outputAsPDF, $config);
+            return $this->doRecognize(
+                $imagePath,
+                $langs,
+                $psm,
+                $oem,
+                $dpi,
+                $wordsFilePath,
+                $patternsFilePath,
+                $outputAsPDF,
+                $config
+            );
         } finally {
             if ($isImagePathTemporary) {
                 unlink($imagePath);
@@ -240,10 +252,12 @@ class Tesseract
     private function transformImageSourceIfNecessary(mixed $imageSource): mixed
     {
         if (extension_loaded("imagick")) {
-            if ($imageSource instanceof Image && $imageSource->getCore() instanceof \Imagick) {
+            if ($imageSource instanceof Image && $imageSource->getCore() instanceof Imagick) {
                 $imageSource = $imageSource->getCore()->getImageBlob();
-            } else if ($imageSource instanceof \Imagick) {
-                $imageSource = $imageSource->getImageBlob();
+            } else {
+                if ($imageSource instanceof Imagick) {
+                    $imageSource = $imageSource->getImageBlob();
+                }
             }
         }
 
@@ -263,17 +277,16 @@ class Tesseract
      * @return string
      */
     private function doRecognize(
-        string       $imagePath,
-        array        $langs,
+        string $imagePath,
+        array $langs,
         PSM|int|null $psm,
         OEM|int|null $oem,
-        ?int         $dpi,
-        ?string      $wordsFilePath,
-        ?string      $patternsFilePath,
-        bool         $outputAsPDF,
-        ?ConfigBag   $config
-    ): string
-    {
+        ?int $dpi,
+        ?string $wordsFilePath,
+        ?string $patternsFilePath,
+        bool $outputAsPDF,
+        ?ConfigBag $config
+    ): string {
         $arguments = [$imagePath, "stdout"];
 
         if ($langs) {
