@@ -10,7 +10,7 @@ declare(strict_types=1);
  *  file that was distributed with this source code.
  */
 
-namespace ahmedghanem00\TesseractOCR\Tests\unit;
+namespace ahmedghanem00\TesseractOCR\Tests\Unit;
 
 use ahmedghanem00\TesseractOCR\ConfigBag;
 use ahmedghanem00\TesseractOCR\Exception\EmptyResultException;
