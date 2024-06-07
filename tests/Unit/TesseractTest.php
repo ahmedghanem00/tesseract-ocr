@@ -26,6 +26,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Smalot\PdfParser\Parser;
 use stdClass;
+use Symfony\Component\Process\Exception\ProcessStartFailedException;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
 
 #[CoversClass(Tesseract::class)]
@@ -44,7 +45,12 @@ class TesseractTest extends TestCase
     {
         $tesseract = new Tesseract("/not/exist/path");
 
-        $this->expectException(UnsuccessfulExecutionException::class);
+        # Starting from `symfony/process:>=7.1.1` && PHP>=8.3 on Linux, this exception is being thrown in case that the binary does not exist
+        if(PHP_OS === 'Linux' && PHP_VERSION_ID >= 80303) {
+            $this->expectException(ProcessStartFailedException::class);
+        } else {
+            $this->expectException(UnsuccessfulExecutionException::class);
+        }
 
         $tesseract->getVersion();
     }
