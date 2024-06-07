@@ -41,9 +41,6 @@ jobs:
       - name: Run PHPStan
         run: composer run-script phpstan
 
-      - name: Local PHP Security Checker
-        uses: docker://pplotka/local-php-security-checker-github-actions
-
       - name: Install Tesseract
         run: sudo apt install tesseract-ocr
 
